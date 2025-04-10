@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интернет Дүкен</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            width: 100%;
+            height: 300px;
+            background: url('https://www.smart-traffik.io/wp-content/uploads/2021/05/image-24.jpeg') no-repeat center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding-top: 120px;
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .navigation {
+            background-color: #333;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+        }
+
+        .navigation a:hover {
+            color: #ffd700;
+        }
+
+        .products {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            color: #666;
+        }
+
+        .price {
+            color: #ff0000;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        Менің Интернет Дүкенім
+    </header>
+
+    <nav class="navigation">
+        <a href="#home">Басты бет</a>
+        <a href="#products">Тауарлар</a>
+        <a href="#about">Біз туралы</a>
+        <a href="#contact">Байланыс</a>
+    </nav>
+
+    <section class="products" id="products">
+        <div class="product-card">
+            <img src="6fac9fce-dbab-492f-874a-3a866c841022.jpg" alt="Тауар 1">
+            <h3>Yunito 1</h3>
+            <p>1. 🟣 Yunito гигиеналық төсемелер (прокладки):<br>
+            Жоғарғы суретте 4 түрлі төсеме көрсетілген:<br>
+            1.1. 330 мм, 8 дана — Түнгі қолданысқа арналған, ұзын әрі сенімді қорғаныс.<br>
+            1.2. 280 мм, 10 дана — Түнгі қолдануға, орташа ұзындық.<br>
+            1.3. 240 мм, 12 дана — Күндізгі қолдануға, жеңіл және ыңғайлы.<br>
+            1.4. 155 мм, 30 дана — Күнделікті қолдануға арналған, өте жұқа және ыңғайлы.<br>
+            Барлығы – Yunito бренді, жұмсақ, жайлы материалдан жасалған.<br>
+            <span class="price">Бағасы: 600 тг</span><br>
+            <strong>Қалған саны: 10 дана</strong></p>
+        </div>
+        <div class="product-card">
+            <img src="d47c73fc-8faf-4334-befd-5a701fc4e3c6.jpg" alt="Тауар 2">
+            <h3>Тауар 2</h3>
+            <p>2. Yunito Шампунь (5-in-1):<br>
+            5 функцияны біріктіретін өнім:<br>
+            2.1. Шашты тазалайды<br>
+            2.2. Жұмсартады<br>
+            2.3. Қалпына келтіреді<br>
+            2.4. Қорғайды<br>
+            2.5. Қоректендіреді<br>
+            Жапон сапасы белгісімен.<br>
+            Көгілдір түсті қаптамада, үлкен көлемде.<br>
+            <span class="price">Бағасы: 2000 тг</span><br>
+            <strong>Қалған саны: 11 дана</strong></p>
+        </div>
+        <div class="product-card">
+            <img src="4b26a817-2190-4513-9c2c-cf70c0af8252.jpg" alt="Тауар 3">
+            <h3>Тауар 3</h3>
+            <p>3. 🟡 Yunito Ыдыс жууға арналған құрал:<br>
+            3.1. Лимон иісті, 900 г көлемді.<br>
+            3.2. Ыдысты жақсы тазартады, майды оңай кетіреді.<br>
+            3.3. Қолға жұмсақ әсер етеді.<br>
+            3.4. Помпасы бар, қолдануға ыңғайлы<br>
+            <span class="price">Бағасы: 1200 тг</span><br>
+            <strong>Қалған саны: 5 дана</strong></p>
+        </div>
+        <div class="product-card">
+            <img src="d5d82fc1-0915-4ef3-af4f-fe7c8eba5cf4.jpg" alt="Тауар 4">
+            <h3>Тауар 4</h3>
+            <p>4. 🔵 BAFURI кір жууға арналған капсулалар (Капсулы для стирки):<br>
+            4.1. 36 дана, 4 в 1 (тазарту, жұмсарту, иіс, түс сақтау).<br>
+            4.2. Түрлі-түсті киімдерге арналған.<br>
+            4.3. Жапон сапасымен.<br>
+            4.4. Қаптамасы ашық көк-сары түсті, көзге тартымды<br>
+            <span class="price">Бағасы: 1800 тг</span><br>
+            <strong>Қалған саны: 24 дана</strong></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        © 2025 Менің Интернет Дүкенім. Барлық құқықтар қорғалған.<br>
+        Телефон: +7 (778 778) 1584<br>
+        WhatsApp: +7 (778 778) 1584 <br>
+        <a href="#contact">Бізбен байланысыңыз</a>
+    </footer>
+</body>
+</html>
