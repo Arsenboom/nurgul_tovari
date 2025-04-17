@@ -1,178 +1,1343 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интернет Дүкен</title>
+    <title>ЭкоДом - Магазин бытовых товаров</title>
     <style>
+        /* Основные стили и переменные */
+        :root {
+            --primary-color: #4caf50;
+            --secondary-color: #2e7d32;
+            --accent-color: #81c784;
+            --light-color: #e8f5e9;
+            --dark-color: #1b5e20;
+            --text-color: #212121;
+            --text-light: #757575;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .header {
-            width: 100%;
-            height: 300px;
-            background: url('https://www.smart-traffik.io/wp-content/uploads/2021/05/image-24.jpeg') no-repeat center;
-            background-size: cover;
-            color: white;
-            text-align: center;
-            padding-top: 120px;
-            font-size: 36px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
-        .navigation {
-            background-color: #333;
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            margin: 0 20px;
-            font-size: 18px;
-        }
-
-        .navigation a:hover {
-            color: #ffd700;
-        }
-
-        .products {
+        .container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .logo span {
+            color: var(--dark-color);
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .header-actions {
+            display: flex;
             gap: 20px;
+            align-items: center;
+        }
+
+        .search-form {
+            position: relative;
+        }
+
+        .search-form input {
+            padding: 8px 15px;
+            width: 250px;
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .search-form button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .cart-button {
+            position: relative;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Слайдер в шапке */
+        .slider {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 76px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin-left: 50px;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-size: 36px;
+        }
+
+        .slide-content p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Навигация */
+        nav {
+            background-color: var(--primary-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu li a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu li a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .nav-menu li.active a {
+            background-color: var(--secondary-color);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .nav-menu li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown li a {
+            color: var(--text-color);
+            padding: 12px 20px;
+        }
+
+        .dropdown li a:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        /* Секция с товарами */
+        .products-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--dark-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: var(--light-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+        }
+
+        .filter-categories {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .sort-dropdown {
+            position: relative;
+        }
+
+        .sort-dropdown select {
+            padding: 8px 15px;
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            background-color: var(--white);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
         }
 
         .product-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
         }
 
         .product-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .product-card img {
-            max-width: 100%;
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
             height: 200px;
-            object-fit: cover;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .product-card h3 {
-            margin: 10px 0;
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            transition: var(--transition);
         }
 
-        .product-card p {
-            color: #666;
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
         }
 
-        .price {
-            color: #ff0000;
-            font-weight: bold;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
+        .product-info {
             padding: 20px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
         }
 
-        .footer a {
-            color: #ffd700;
+        .product-category {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-price .old-price {
+            font-size: 16px;
+            color: var(--text-light);
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .product-rating i {
+            color: #FFD700;
+            font-size: 14px;
+        }
+
+        .product-rating span {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .add-to-cart {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .product-description {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--text-light);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-widget h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-widget h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links li a {
+            color: #b0b0b0;
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links li a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact li i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 5px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .search-form input {
+                width: 200px;
+            }
+            .slider {
+                height: 400px;
+            }
+            .slide-content {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .slider {
+                height: 350px;
+                margin-top: 130px;
+            }
+            .slide-content {
+                margin-left: 30px;
+                padding: 20px;
+                max-width: 80%;
+            }
+            .slide-content h2 {
+                font-size: 28px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-form input {
+                width: 100%;
+            }
+            .slider {
+                height: 300px;
+            }
+            .slide-content {
+                margin-left: 20px;
+                max-width: 90%;
+            }
+            .slide-content h2 {
+                font-size: 24px;
+            }
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        /* Дополнительные анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        Менің Интернет Дүкенім
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Эко</span>Дом
+                </a>
+                <div class="header-actions">
+                    <form class="search-form">
+                        <input type="text" placeholder="Поиск товаров...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    <button class="cart-button">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <nav class="navigation">
-        <a href="#home">Басты бет</a>
-        <a href="#products">Тауарлар</a>
-        <a href="#about">Біз туралы</a>
-        <a href="#contact">Байланыс</a>
+    <!-- Слайдер -->
+    <div class="slider">
+        <div class="slide active" style="background-image: url('https://sun9-1.userapi.com/Hawn9oaIyrvyMeyxTAL6OYUfTCHDDlOwaUAVmA/Td3KZarl-TE.jpg');">
+            <div class="slide-content">
+                <h2>Экологичные средства для дома</h2>
+                <p>Широкий ассортимент экологически чистых средств для уборки и ухода за домом. Безопасно для всей семьи!</p>
+                <a href="#" class="btn">Подробнее</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('d47c73fc-8faf-4334-befd-5a701fc4e3c6.jpg');">
+            <div class="slide-content">
+                <h2>Косметика для тела и волос</h2>
+                <p>Натуральная косметика без химических добавок. Бережный уход за кожей и волосами.</p>
+                <a href="#" class="btn">Смотреть каталог</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('/api/placeholder/1200/600');">
+            <div class="slide-content">
+                <h2>Скидки до 30%</h2>
+                <p>Специальные предложения на весь ассортимент экологичных средств для дома.</p>
+                <a href="#" class="btn">Купить сейчас</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('/api/placeholder/1200/600');">
+            <div class="slide-content">
+                <h2>Органические шампуни</h2>
+                <p>Безсульфатные шампуни с натуральными компонентами для всех типов волос.</p>
+                <a href="#" class="btn">В каталог</a>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+    </div>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li class="active"><a href="#">Главная</a></li>
+                <li>
+                    <a href="#">Категории</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Средства для мытья посуды</a></li>
+                        <li><a href="#">Шампуни и бальзамы</a></li>
+                        <li><a href="#">Средства для уборки</a></li>
+                        <li><a href="#">Уход за телом</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Бестселлеры</a></li>
+                <li><a href="#">Акции</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="products" id="products">
-        <div class="product-card">
-            <img src="6fac9fce-dbab-492f-874a-3a866c841022.jpg" alt="Тауар 1">
-            <h3>Yunito 1</h3>
-            <p>1. 🟣 Yunito гигиеналық төсемелер (прокладки):<br>
-            Жоғарғы суретте 4 түрлі төсеме көрсетілген:<br>
-            1.1. 330 мм, 8 дана — Түнгі қолданысқа арналған, ұзын әрі сенімді қорғаныс.<br>
-            1.2. 280 мм, 10 дана — Түнгі қолдануға, орташа ұзындық.<br>
-            1.3. 240 мм, 12 дана — Күндізгі қолдануға, жеңіл және ыңғайлы.<br>
-            1.4. 155 мм, 30 дана — Күнделікті қолдануға арналған, өте жұқа және ыңғайлы.<br>
-            Барлығы – Yunito бренді, жұмсақ, жайлы материалдан жасалған.<br>
-            <span class="price">Бағасы: 600 тг</span><br>
-            <strong>Қалған саны: 10 дана</strong></p>
-        </div>
-        <div class="product-card">
-            <img src="d47c73fc-8faf-4334-befd-5a701fc4e3c6.jpg" alt="Тауар 2">
-            <h3>Тауар 2</h3>
-            <p>2. Yunito Шампунь (5-in-1):<br>
-            5 функцияны біріктіретін өнім:<br>
-            2.1. Шашты тазалайды<br>
-            2.2. Жұмсартады<br>
-            2.3. Қалпына келтіреді<br>
-            2.4. Қорғайды<br>
-            2.5. Қоректендіреді<br>
-            Жапон сапасы белгісімен.<br>
-            Көгілдір түсті қаптамада, үлкен көлемде.<br>
-            <span class="price">Бағасы: 2000 тг</span><br>
-            <strong>Қалған саны: 11 дана</strong></p>
-        </div>
-        <div class="product-card">
-            <img src="4b26a817-2190-4513-9c2c-cf70c0af8252.jpg" alt="Тауар 3">
-            <h3>Тауар 3</h3>
-            <p>3. 🟡 Yunito Ыдыс жууға арналған құрал:<br>
-            3.1. Лимон иісті, 900 г көлемді.<br>
-            3.2. Ыдысты жақсы тазартады, майды оңай кетіреді.<br>
-            3.3. Қолға жұмсақ әсер етеді.<br>
-            3.4. Помпасы бар, қолдануға ыңғайлы<br>
-            <span class="price">Бағасы: 1200 тг</span><br>
-            <strong>Қалған саны: 5 дана</strong></p>
-        </div>
-        <div class="product-card">
-            <img src="d5d82fc1-0915-4ef3-af4f-fe7c8eba5cf4.jpg" alt="Тауар 4">
-            <h3>Тауар 4</h3>
-            <p>4. 🔵 BAFURI кір жууға арналған капсулалар (Капсулы для стирки):<br>
-            4.1. 36 дана, 4 в 1 (тазарту, жұмсарту, иіс, түс сақтау).<br>
-            4.2. Түрлі-түсті киімдерге арналған.<br>
-            4.3. Жапон сапасымен.<br>
-            4.4. Қаптамасы ашық көк-сары түсті, көзге тартымды<br>
-            <span class="price">Бағасы: 1800 тг</span><br>
-            <strong>Қалған саны: 24 дана</strong></p>
+    <!-- Секция с товарами -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-title animate-fadeIn">
+                <h2>Все товары</h2>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-categories">
+                    <button class="filter-btn active">Все</button>
+                    <button class="filter-btn">Для посуды</button>
+                    <button class="filter-btn">Шампуни</button>
+                    <button class="filter-btn">Для уборки</button>
+                </div>
+                <div class="sort-dropdown">
+                    <select>
+                        <option value="popularity">По популярности</option>
+                        <option value="price-asc">По возрастанию цены</option>
+                        <option value="price-desc">По убыванию цены</option>
+                        <option value="new">Новинки</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Товар 1 -->
+                 <div class="product-card animate-fadeIn">
+                    <div class="product-image">
+                        <img src="4b26a817-2190-4513-9c2c-cf70c0af8252.jpg" alt="гель для посуды">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Шампуни</div>
+                        <h3 class="product-title">гель для посуды "YUNITTO"</h3>
+                        <div class="product-price">
+                            <span>1200 ₸</span>
+                        </div>
+                        <div class="product-description">
+                            Средство для мытья посуды с ароматом лимона, объёмом 900 г — эффективно удаляет жир и загрязнения.. Объем: 900 гр.
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(4.0)</span>
+                            </div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Товар 2 -->
+                <div class="product-card animate-fadeIn">
+                    <div class="product-image">
+                        <img src="d47c73fc-8faf-4334-befd-5a701fc4e3c6.jpg" alt="Шампунь">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Шампуни</div>
+                        <h3 class="product-title">Натуральный шампунь "YUNITTO"</h3>
+                        <div class="product-price">
+                            <span>2000 ₸</span>
+                        </div>
+                        <div class="product-description">
+                           Шампунь 5-в-1 Yunitto — очищение, уход, питание, защита и блеск для ваших волос. Объем: 400 мл.
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(4.0)</span>
+                            </div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="product-card animate-fadeIn">
+
+
+                    <div class="product-image">
+                        <img src="6fac9fce-dbab-492f-874a-3a866c841022.jpg" alt="прокладки юнитто">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Для уборки</div>
+                        <h3 class="product-title">гигиеические женские прокладки "прокладки юнитто"</h3>
+                        <div class="product-price">
+                            <span>600 ₸</span>
+                        </div>
+                        <div class="product-description">
+                            Гигиенические прокладки Yunitto Night — в ассортименте разные размеры и количество штук в упаковке: 330 мм (8 шт), 280 мм (10 шт), 240 мм (12 шт), и ежедневные 155 мм (30 шт)
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(5.0)</span>
+                            </div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="product-card animate-fadeIn">
+                    <div class="product-image">
+                        <img src="d5d82fc1-0915-4ef3-af4f-fe7c8eba5cf4.jpg" alt="Бальзам для волос">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Шампуни и бальзамы</div>
+                        <h3 class="product-title">капсула для стирки "BAFURI"</h3>
+                        <div class="product-price">
+                            <span>1800 ₸</span>
+                        </div>
+                        <div class="product-description">
+                            Японское качество
+
+36 штук, формула 4в1
+
+Эффективная стирка с чудо-формулой. .
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(4.7)</span>
+                            </div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 5 -->
+                <div class="product-card animate-fadeIn">
+                    <div class="product-badge">-30%</div>
+                    <div class="product-image">
+                        <img src="4f7f4180-fbb8-47d0-b6f6-1deeaa1a8d02.jpg" alt="Средство для стирки">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Для стирки</div>
+                        <h3 class="product-title">чтобы уничтожить бактерии "MAXILIN"</h3>
+                        <div class="product-price">
+                            <span class="old-price"></span>
+                            <span>3000 ₸</span>
+                        </div>
+                        <div class="product-description">
+                            Первый в мире продукт, устойчивый к антибактериям, которые уничтожают бактерии, такие как золотистый стафилококк. Необходим для поддержания жизнедеятельности организма. .
+                        </div>
+                        <div class="product-bottom">
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(4.2)</span>
+                            </div>
+                            <div class="add-to-cart">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 6 -->
+
+
+                <!-- Товар 7 -->
+
+
+                <!-- Товар 8 -->
+
+            </div>
         </div>
     </section>
 
-    <footer class="footer">
-        © 2025 Менің Интернет Дүкенім. Барлық құқықтар қорғалған.<br>
-        Телефон: +7 (778 778) 1584<br>
-        WhatsApp: +7 (778 778) 1584 <br>
-        <a href="#contact">Бізбен байланысыңыз</a>
+
+    <!-- Секция До/После использования -->
+<section class="before-after-section">
+    <div class="container">
+        <div class="section-title animate-fadeIn">
+            <h2>Результаты использования</h2>
+        </div>
+
+        <div class="before-after-container">
+            <div class="before-after-card left">
+                <div class="before-after-image">
+                    <img src="WhatsApp Image 2025-04-17 at 08.58.50.jpeg" alt="До использования">
+                    <div class="image-badge">ДО</div>
+                </div>
+                <div class="before-after-content">
+                    <h3>До использования нашей продукции</h3>
+                    <ul>
+                        <li><i class="fas fa-times"></i> Сложные пятна и загрязнения</li>
+                        <li><i class="fas fa-times"></i> Токсичные химические вещества</li>
+                        <li><i class="fas fa-times"></i> Раздражение кожи и аллергические реакции</li>
+                        <li><i class="fas fa-times"></i> Вред для окружающей среды</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="before-after-card right">
+                <div class="before-after-image">
+                    <img src="WhatsApp Image 2025-04-17 at 08.58.51.jpeg" alt="После использования">
+                    <div class="image-badge green">ПОСЛЕ</div>
+                </div>
+                <div class="before-after-content">
+                    <h3>После использования нашей продукции</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Чистота и свежесть без усилий</li>
+                        <li><i class="fas fa-check"></i> 100% натуральные компоненты</li>
+                        <li><i class="fas fa-check"></i> Безопасно для всей семьи</li>
+                        <li><i class="fas fa-check"></i> Экологичность и биоразлагаемость</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Стили для секции До/После */
+.before-after-section {
+    padding: 70px 0;
+    background-color: #f1f8e9;
+    overflow: hidden;
+}
+
+.before-after-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.before-after-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    width: calc(50% - 20px);
+    max-width: 500px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.before-after-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+.before-after-card.left {
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+.before-after-card.right {
+    animation: slideInRight 1s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.before-after-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.before-after-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease;
+}
+
+.before-after-card:hover .before-after-image img {
+    transform: scale(1.1);
+}
+
+.image-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff5252;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.image-badge.green {
+    background-color: var(--primary-color);
+}
+
+.before-after-content {
+    padding: 25px;
+}
+
+.before-after-content h3 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.before-after-content ul {
+    list-style: none;
+}
+
+.before-after-content li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.before-after-content li i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.before-after-content .fa-times {
+    color: #ff5252;
+}
+
+.before-after-content .fa-check {
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .before-after-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .before-after-card {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+// Скрипт для анимации секции До/После
+document.addEventListener('DOMContentLoaded', function() {
+    // Функция для проверки видимости элемента в окне просмотра
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    }
+
+    // Функция для анимации при прокрутке
+    function animateBeforeAfterOnScroll() {
+        const leftCard = document.querySelector('.before-after-card.left');
+        const rightCard = document.querySelector('.before-after-card.right');
+
+        if (isElementInViewport(leftCard) && !leftCard.classList.contains('animated')) {
+            leftCard.classList.add('animated');
+            leftCard.style.animation = 'slideInLeft 1s ease-out forwards';
+        }
+
+        if (isElementInViewport(rightCard) && !rightCard.classList.contains('animated')) {
+            rightCard.classList.add('animated');
+            rightCard.style.animation = 'slideInRight 1s ease-out forwards';
+        }
+    }
+
+    // Инициализация при загрузке страницы
+    window.addEventListener('scroll', animateBeforeAfterOnScroll);
+    animateBeforeAfterOnScroll(); // Запускаем при загрузке
+});
+</script>
+
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-widget">
+                    <h3>О компании</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Наша миссия</a></li>
+                        <li><a href="#">Наши ценности</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-widget">
+                    <h3>Информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                        <li><a href="#">Вопросы и ответы</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-widget">
+                    <h3>Категории</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Средства для мытья посуды</a></li>
+                        <li><a href="#">Шампуни и бальзамы</a></li>
+                        <li><a href="#">Средства для уборки</a></li>
+                        <li><a href="#">Уход за телом</a></li>
+                        <li><a href="#">Все категории</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-widget">
+                    <h3>Контакты</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> г. Алматы, ул. Абая, 123</li>
+                        <li><i class="fas fa-phone"></i> +7 (777) 123-45-67</li>
+                        <li><i class="fab fa-whatsapp"></i> +7 (777) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@ecodom.kz</li>
+                    </ul>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 ЭкоДом - магазин экологичных товаров для дома</p>
+                <p>Все права защищены</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Слайдер
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + slides.length) % slides.length;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Инициализация слайдера и автопрокрутка
+        function initSlider() {
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(slideInterval);
+                    showSlide(index);
+                    startSlideInterval();
+                });
+            });
+
+            startSlideInterval();
+        }
+
+        function startSlideInterval() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Фильтрация товаров
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // Здесь можно добавить логику фильтрации товаров
+            });
+        });
+
+        // Добавление в корзину
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        let count = 0;
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                count++;
+                cartCount.textContent = count;
+                button.classList.add('animate-pulse');
+                setTimeout(() => {
+                    button.classList.remove('animate-pulse');
+                }, 1000);
+            });
+        });
+
+        // Анимация при прокрутке
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-fadeIn');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                }
+            });
+        }
+
+        // Инициализация всех функций при загрузке страницы
+        window.onload = function() {
+            initSlider();
+            animateOnScroll();
+
+            // Запускаем анимацию при прокрутке
+            window.addEventListener('scroll', animateOnScroll);
+        };
+    </script>
 </body>
 </html>
